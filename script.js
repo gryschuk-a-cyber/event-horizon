@@ -11,7 +11,6 @@ function resize() {
 
     gargantuaCanvas.width = window.innerWidth;
     gargantuaCanvas.height = window.innerHeight;
-
 }
 
 resize();
@@ -21,7 +20,7 @@ window.addEventListener(
     resize
 );
 
-/* -------- ЗОРІ -------- */
+/* ---------- ЗІРКИ ---------- */
 
 const stars = [];
 
@@ -84,12 +83,11 @@ function drawStars(){
     requestAnimationFrame(
         drawStars
     );
-
 }
 
 drawStars();
 
-/* -------- ГАРГАНТЮА -------- */
+/* ---------- ГАРГАНТЮА ---------- */
 
 function drawGargantua(){
 
@@ -101,26 +99,20 @@ function drawGargantua(){
     );
 
     const cx =
-        gargantuaCanvas.width/2;
+    gargantuaCanvas.width / 2;
 
     const cy =
-        gargantuaCanvas.height/2;
+    gargantuaCanvas.height / 2;
 
     const r =
-        Math.min(
-            gargantuaCanvas.width,
-            gargantuaCanvas.height
-        ) * 0.12;
+    Math.min(
+        gargantuaCanvas.width,
+        gargantuaCanvas.height
+    ) * 0.12;
 
-    /* гравітаційне лінзування */
+       /* ПЕРЕДНЯ ВИДИМА ЧАСТИНА ДИСКА */
 
-    const glow =
-    gctx.createRadialGradient(
-        cx,
-        cy,
-    /* ПЕРЕДНЯ ЧАСТИНА ДИСКА */
-
-    for(let i=0;i<10;i++){
+    for(let i=0;i<12;i++){
 
         gctx.beginPath();
 
@@ -129,20 +121,20 @@ function drawGargantua(){
             255,
             235,
             180,
-            ${0.04 + i*0.015}
+            ${0.05 + i*0.015}
         )`;
 
         gctx.lineWidth =
-            1 + i*0.5;
+        1 + i*0.4;
 
         gctx.ellipse(
             cx,
-            cy + r*0.18,
-            r*2.2 + i*1.5,
-            r*0.018 + i*0.01,
+            cy + r*0.12,
+            r*2.15 + i,
+            r*0.012 + i*0.006,
             0,
-            0,
-            Math.PI*2
+            Math.PI * 0.15,
+            Math.PI * 0.85
         );
 
         gctx.stroke();
@@ -157,7 +149,7 @@ function drawGargantua(){
 
 drawGargantua();
 
-/* -------- ОБ'ЄКТИ -------- */
+/* ---------- ОБ'ЄКТИ ---------- */
 
 const nuclear =
 document.querySelector(".nuclear");
@@ -177,10 +169,10 @@ document.querySelector(".video");
 function setPlanet(el,x,y){
 
     el.style.left =
-    (x - el.offsetWidth/2) + "px";
+        (x - el.offsetWidth/2) + "px";
 
     el.style.top =
-    (y - el.offsetHeight/2) + "px";
+        (y - el.offsetHeight/2) + "px";
 
 }
 
@@ -203,8 +195,8 @@ function animatePlanets(){
 
     setPlanet(
         semiconductor,
-        cx - 120 + Math.cos(t*0.8)*15,
-        cy - 90
+        cx - 150 + Math.cos(t*0.8)*15,
+        cy - 110
     );
 
     setPlanet(
@@ -216,13 +208,13 @@ function animatePlanets(){
     setPlanet(
         radio,
         cx + 430 + Math.cos(t*0.3)*10,
-        cy - 70
+        cy - 90
     );
 
     setPlanet(
         video,
-        cx + Math.cos(t*3.8)*150,
-        cy + Math.sin(t*3.8)*40
+        cx + Math.cos(t*3.8)*170,
+        cy + Math.sin(t*3.8)*60
     );
 
     requestAnimationFrame(
