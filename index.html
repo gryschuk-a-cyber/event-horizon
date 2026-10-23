@@ -2,9 +2,267 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Event Horizon</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+overflow:hidden;
+background:#000;
+font-family:Arial,sans-serif;
+height:100vh;
+width:100vw;
+}
+
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(white 1px, transparent 1px);
+background-size:60px 60px;
+opacity:0.5;
+}
+
+.blackhole{
+position:absolute;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+width:min(70vw,70vh);
+height:min(70vw,70vh);
+border-radius:50%;
+background:black;
+box-shadow:
+0 0 200px #ff9e00,
+0 0 300px #ff6f00,
+0 0 350px rgba(255,120,0,.4);
+z-index:5;
+}
+
+.blackhole::before{
+content:'';
+position:absolute;
+inset:-20%;
+border-radius:50%;
+background:
+radial-gradient(circle,
+rgba(255,180,0,.95) 0%,
+rgba(255,120,0,.9) 25%,
+rgba(255,80,0,.8) 45%,
+transparent 60%);
+animation:disk 15s linear infinite;
+filter:blur(12px);
+}
+
+@keyframes disk{
+from{
+transform:rotate(0deg) scaleX(1.9);
+}
+to{
+transform:rotate(360deg) scaleX(1.9);
+}
+}
+
+.orbit{
+position:absolute;
+left:50%;
+top:50%;
+transform-style:preserve-3d;
+}
+
+.object{
+position:absolute;
+width:90px;
+height:90px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:42px;
+cursor:pointer;
+text-decoration:none;
+backdrop-filter:blur(5px);
+transition:.3s;
+user-select:none;
+}
+
+.object:hover{
+transform:scale(1.2);
+}
+
+.label{
+position:absolute;
+top:100%;
+left:50%;
+transform:translateX(-50%);
+white-space:nowrap;
+font-size:12px;
+color:white;
+margin-top:8px;
+text-align:center;
+}
+
+.nuclear{
+background:#2196f3;
+}
+
+.semiconductor{
+background:#00bcd4;
+}
+
+.mechanics{
+background:#9c27b0;
+}
+
+.radio{
+background:#4caf50;
+}
+
+.video{
+background:#ff5722;
+}
+
+.rotate1{
+animation:orbit1 30s linear infinite;
+}
+
+.rotate2{
+animation:orbit2 40s linear infinite;
+}
+
+.rotate3{
+animation:orbit3 35s linear infinite;
+}
+
+.rotate4{
+animation:orbit4 50s linear infinite;
+}
+
+.rotate5{
+animation:orbit5 15s linear infinite;
+}
+
+@keyframes orbit1{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
+
+@keyframes orbit2{
+from{transform:rotate(360deg);}
+to{transform:rotate(0deg);}
+}
+
+@keyframes orbit3{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
+
+@keyframes orbit4{
+from{transform:rotate(360deg);}
+to{transform:rotate(0deg);}
+}
+
+@keyframes orbit5{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
+
+@media(max-width:768px){
+
+.object{
+width:70px;
+height:70px;
+font-size:30px;
+}
+
+.label{
+font-size:10px;
+}
+
+.blackhole{
+width:85vw;
+height:85vw;
+}
+
+}
+
+</style>
 </head>
+
 <body>
-<h1>🕳️ Event Horizon</h1>
+
+<div class="stars"></div>
+
+<div class="blackhole"></div>
+
+<div class="orbit rotate1">
+<a class="object nuclear"
+style="transform:translateX(360px)"
+href="https://drive.google.com/drive/folders/1pgVjmirx5zQP5v_W080ue8qMUYkrs1oS?usp=sharing"
+target="_blank">
+⚛️
+<div class="label">
+Фізика ядра
+</div>
+</a>
+</div>
+
+<div class="orbit rotate2">
+<a class="object semiconductor"
+style="transform:translateX(290px)"
+href="https://drive.google.com/drive/folders/1_gnIbizWyluyhaHodqn8mg7JbauR3Igd?usp=sharing"
+target="_blank">
+💎
+<div class="label">
+Напівпровідники
+</div>
+</a>
+</div>
+
+<div class="orbit rotate3">
+<a class="object mechanics"
+style="transform:translateX(440px)"
+href="https://drive.google.com/drive/folders/1k0wxwbMrUFMAlsgtt0J_MvD8pNOlIF3f?usp=sharing"
+target="_blank">
+🪐
+<div class="label">
+Теоретична механіка
+</div>
+</a>
+</div>
+
+<div class="orbit rotate4">
+<a class="object radio"
+style="transform:translateX(520px)"
+href="https://drive.google.com/drive/folders/1vwclRm7k7wVxIQWNTVWecNj9tlskMgWr?usp=sharing"
+target="_blank">
+📡
+<div class="label">
+Радіотехніка
+</div>
+</a>
+</div>
+
+<div class="orbit rotate5">
+<a class="object video"
+style="transform:translateX(230px)"
+href="https://drive.google.com/drive/folders/1yQppVQqbycx3ckBJ_e9AnZ7OGgzNRnbl?usp=sharing"
+target="_blank">
+🌠
+<div class="label">
+Відео лекцій
+</div>
+</a>
+</div>
+
 </body>
 </html>
