@@ -1,246 +1,252 @@
 const starsCanvas = document.getElementById("space");
 const starsCtx = starsCanvas.getContext("2d");
 
-const gargantuaCanvas =
-document.getElementById("gargantua");
+const gargantuaCanvas = document.getElementById("gargantua");
+const gctx = gargantuaCanvas.getContext("2d");
 
-const gctx =
-gargantuaCanvas.getContext("2d");
+function resize() {
+    starsCanvas.width = window.innerWidth;
+    starsCanvas.height = window.innerHeight;
 
-function resize(){
-
-starsCanvas.width =
-window.innerWidth;
-
-starsCanvas.height =
-window.innerHeight;
-
-gargantuaCanvas.width =
-window.innerWidth;
-
-gargantuaCanvas.height =
-window.innerHeight;
-
+    gargantuaCanvas.width = window.innerWidth;
+    gargantuaCanvas.height = window.innerHeight;
 }
 
 resize();
+window.addEventListener("resize", resize);
 
-window.addEventListener("resize",resize);
+/* -------------------- ЗІРКИ -------------------- */
 
-const stars=[];
+const stars = [];
 
-function generateStars(){
+function createStars() {
 
-stars.length=0;
+    stars.length = 0;
 
-for(let i=0;i<1000;i++){
+    for (let i = 0; i < 1200; i++) {
 
-stars.push({
+        stars.push({
+            x: Math.random() * starsCanvas.width,
+            y: Math.random() * starsCanvas.height,
+            r: Math.random() * 2.2,
+            a: 0.2 + Math.random() * 0.8
+        });
 
-x:Math.random()*window.innerWidth,
-y:Math.random()*window.innerHeight,
-
-r:Math.random()*2,
-
-a:Math.random()
-
-});
-
+    }
 }
 
-}
+createStars();
 
-generateStars();
+window.addEventListener("resize", createStars);
 
-function drawStars(){
+function drawStars() {
 
-starsCtx.clearRect(
-0,0,
-starsCanvas.width,
-starsCanvas.height
-);
+    starsCtx.clearRect(
+        0,0,
+        starsCanvas.width,
+        starsCanvas.height
+    );
 
-for(const s of stars){
+    for(const star of stars){
 
-starsCtx.beginPath();
+        starsCtx.beginPath();
 
-starsCtx.fillStyle=
-`rgba(255,255,255,${s.a})`;
+        starsCtx.fillStyle =
+            `rgba(255,255,255,${star.a})`;
 
-starsCtx.arc(
-s.x,s.y,s.r,
-0,Math.PI*2
-);
+        starsCtx.arc(
+            star.x,
+            star.y,
+            star.r,
+            0,
+            Math.PI * 2
+        );
 
-starsCtx.fill();
+        starsCtx.fill();
+    }
 
-}
-
-requestAnimationFrame(drawStars);
-
+    requestAnimationFrame(drawStars);
 }
 
 drawStars();
 
-let t=0;
+/* -------------------- ГАРГАНТЮА -------------------- */
 
-function drawGargantua(){
+function drawGargantua() {
 
-gctx.clearRect(
-0,0,
-gargantuaCanvas.width,
-gargantuaCanvas.height
-);
+    gctx.clearRect(
+        0,
+        0,
+        gargantuaCanvas.width,
+        gargantuaCanvas.height
+    );
 
-const cx=
-window.innerWidth/2;
+    const cx = gargantuaCanvas.width / 2;
+    const cy = gargantuaCanvas.height / 2;
 
-const cy=
-window.innerHeight/2;
+    const r =
+        Math.min(
+            gargantuaCanvas.width,
+            gargantuaCanvas.height
+        ) * 0.12;
 
-const r=
-Math.min(
-window.innerWidth,
-window.innerHeight
-)*0.13;
+    /* гравітаційне лінзування */
 
-t+=0.01;
+    const glow = gctx.createRadialGradient(
+        cx,
+        cy,
+        r * 1.05,
+        cx,
+        cy,
+        r * 2.2
+    );
 
-const lens=
-gctx.createRadialGradient(
-cx,
-cy,
-r*1.05,
-cx,
-cy,
-r*1.55
-);
+    glow.addColorStop(0,"rgba(255,220,180,0)");
+    glow.addColorStop(0.35,"rgba(255,200,120,0.18)");
+    glow.addColorStop(1,"rgba(0,0,0,0)");
 
-lens.addColorStop(
-0,
-"rgba(255,255,255,0)"
-);
+    gctx.fillStyle = glow;
 
-lens.addColorStop(
-0.35,
-"rgba(255,220,140,0.18)"
-);
+    gctx.beginPath();
+    gctx.arc(
+        cx,
+        cy,
+        r * 2.1,
+        0,
+        Math.PI * 2
+    );
+    gctx.fill();
 
-lens.addColorStop(
-1,
-"rgba(0,0,0,0)"
-);
+    /* ЗАДНЯ ДУГА АКРЕЦІЙНОГО ДИСКА */
 
-gctx.fillStyle=lens;
+    for(let i=0;i<25;i++){
 
-gctx.beginPath();
+        gctx.beginPath();
 
-gctx.arc(
-cx,
-cy,
-r*1.65,
-0,
-Math.PI*2
-);
+        gctx.strokeStyle =
+        `rgba(
+            255,
+            220,
+            140,
+            ${0.015 + i*0.01}
+        )`;
 
-gctx.fill();
+        gctx.lineWidth = 2 + i;
 
-for(let i=0;i<22;i++){
+        gctx.ellipse(
+            cx,
+            cy,
+            r*2.8 + i*3,
+            r*0.42 + i*0.25,
+            0,
+            0,
+            Math.PI*2
+        );
 
-gctx.strokeStyle=
-`rgba(
-255,
-${190+i*2},
-80,
-${0.03+i*0.01}
-)`;
+        gctx.stroke();
 
-gctx.lineWidth=
-2+i*0.8;
+    }
 
-gctx.beginPath();
+    /* ВЕРХНЄ ВІДОБРАЖЕННЯ ДИСКА */
 
-gctx.ellipse(
-cx,
-cy,
-r*2.6+(i*4),
-(r*0.32)+(i*0.4),
-0,
-0,
-Math.PI*2
-);
+    for(let i=0;i<18;i++){
 
-gctx.stroke();
+        gctx.beginPath();
 
-}
+        gctx.strokeStyle =
+        `rgba(
+            255,
+            255,
+            220,
+            ${0.012 + i*0.012}
+        )`;
 
-for(let i=0;i<20;i++){
+        gctx.lineWidth = 1 + i*0.4;
 
-gctx.strokeStyle=
-`rgba(
-255,
-255,
-220,
-${0.02+i*0.01}
-)`;
+        gctx.ellipse(
+            cx,
+            cy - r*0.9,
+            r*1.2 + i,
+            r*0.12 + i*0.08,
+            0,
+            0,
+            Math.PI*2
+        );
 
-gctx.lineWidth=
-1+i*0.4;
+        gctx.stroke();
 
-gctx.beginPath();
+    }
 
-gctx.ellipse(
-cx,
-cy-r*0.95,
-r*0.9+(i*1.8),
-r*0.12+(i*0.15),
-0,
-0,
-Math.PI*2
-);
+    /* горизонт подій */
 
-gctx.stroke();
+    gctx.beginPath();
 
-}
+    gctx.arc(
+        cx,
+        cy,
+        r,
+        0,
+        Math.PI*2
+    );
 
-gctx.beginPath();
+    gctx.fillStyle = "#000";
+    gctx.fill();
 
-gctx.arc(
-cx,
-cy,
-r,
-0,
-Math.PI*2
-);
+    /* фотонне кільце */
 
-gctx.fillStyle="black";
+    gctx.beginPath();
 
-gctx.fill();
+    gctx.arc(
+        cx,
+        cy,
+        r*1.03,
+        0,
+        Math.PI*2
+    );
 
-gctx.beginPath();
+    gctx.lineWidth = 3;
 
-gctx.arc(
-cx,
-cy,
-r*1.03,
-0,
-Math.PI*2
-);
+    gctx.strokeStyle =
+        "rgba(255,220,140,0.4)";
 
-gctx.strokeStyle=
-"rgba(255,200,120,0.35)";
+    gctx.stroke();
 
-gctx.lineWidth=4;
+    /* ПЕРЕДНЯ ЧАСТИНА ДИСКА */
 
-gctx.stroke();
+    for(let i=0;i<15;i++){
 
-requestAnimationFrame(
-drawGargantua
-);
+        gctx.beginPath();
 
+        gctx.strokeStyle =
+        `rgba(
+            255,
+            235,
+            180,
+            ${0.03 + i*0.02}
+        )`;
+
+        gctx.lineWidth = 1 + i;
+
+        gctx.ellipse(
+            cx,
+            cy + r*0.95,
+            r*2.6 + i*3,
+            r*0.08 + i*0.05,
+            0,
+            0,
+            Math.PI*2
+        );
+
+        gctx.stroke();
+
+    }
+
+    requestAnimationFrame(drawGargantua);
 }
 
 drawGargantua();
+
+/* -------------------- ОБ'ЄКТИ -------------------- */
 
 const nuclear =
 document.querySelector(".nuclear");
@@ -257,64 +263,26 @@ document.querySelector(".radio");
 const video =
 document.querySelector(".video");
 
-function setPos(el,x,y){
+function setPlanet(el,x,y){
 
-el.style.left=
-(x-el.offsetWidth/2)+"px";
+    el.style.left =
+        (x - el.offsetWidth/2) + "px";
 
-el.style.top=
-(y-el.offsetHeight/2)+"px";
-
+    el.style.top =
+        (y - el.offsetHeight/2) + "px";
 }
 
-function animateObjects(){
+function animatePlanets(){
 
-const cx=
-window.innerWidth/2;
+    const cx = window.innerWidth/2;
+    const cy = window.innerHeight/2;
 
-const cy=
-window.innerHeight/2;
+    const t = performance.now()/1000;
 
-const tt=
-performance.now()/1000;
+    setPlanet(
+        nuclear,
+        cx - 330 + Math.cos(t)*20,
+        cy + 140
+    );
 
-setPos(
-nuclear,
-cx-290+Math.cos(tt)*15,
-cy+150
-);
-
-setPos(
-semiconductor,
-cx-110+Math.cos(tt*0.7)*25,
-cy-120
-);
-
-setPos(
-mechanics,
-cx+250+Math.sin(tt*0.4)*20,
-cy+80
-);
-
-setPos(
-radio,
-cx+420+Math.cos(tt*0.25)*15,
-cy-90
-);
-
-setPos(
-video,
-cx+
-Math.cos(tt*4)*180,
-
-cy+
-Math.sin(tt*4)*60
-);
-
-requestAnimationFrame(
-animateObjects
-);
-
-}
-
-animateObjects();
+    setPlanet
