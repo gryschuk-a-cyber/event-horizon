@@ -147,50 +147,39 @@ function drawGargantua() {
 
     }
 
-    /* ВЕРХНЄ ВІДОБРАЖЕННЯ ДИСКА */
+     /* горизонт подій */
 
-    for(let i=0;i<18;i++){
+const horizon =
+gctx.createRadialGradient(
+    cx,
+    cy,
+    r * 0.25,
+    cx,
+    cy,
+    r * 1.15
+);
 
-        gctx.beginPath();
+horizon.addColorStop(
+    0,
+    "rgba(0,0,0,1)"
+);
 
-        gctx.strokeStyle =
-        `rgba(
-            255,
-            255,
-            220,
-            ${0.012 + i*0.012}
-        )`;
+horizon.addColorStop(
+    0.60,
+    "rgba(0,0,0,1)"
+);
 
-        gctx.lineWidth = 1 + i*0.4;
+horizon.addColorStop(
+    0.90,
+    "rgba(5,5,5,0.9)"
+);
 
-        gctx.ellipse(
-            cx,
-            cy - r*0.9,
-            r*1.2 + i,
-            r*0.12 + i*0.08,
-            0,
-            0,
-            Math.PI*2
-        );
+horizon.addColorStop(
+    1,
+    "rgba(255,210,120,0.08)"
+);
 
-        gctx.stroke();
-
-    }
-
-    /* горизонт подій */
-
-    gctx.beginPath();
-
-    gctx.arc(
-        cx,
-        cy,
-        r,
-        0,
-        Math.PI*2
-    );
-
-    gctx.fillStyle = "#000";
-    gctx.fill();
+gctx.beginPath();
 
     /* фотонне кільце */
 
@@ -229,7 +218,7 @@ function drawGargantua() {
 
         gctx.ellipse(
             cx,
-            cy + r*0.95,
+            cy + r*0.35,
             r*2.6 + i*3,
             r*0.08 + i*0.05,
             0,
