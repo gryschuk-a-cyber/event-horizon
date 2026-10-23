@@ -1,169 +1,176 @@
-html,body{
-margin:0;
-width:100%;
-height:100%;
-overflow:hidden;
-background:#000;
-font-family:Segoe UI,sans-serif;
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    font-family: "Segoe UI", sans-serif;
 }
 
-#space{
-position:fixed;
-inset:0;
-z-index:0;
+#space {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
 }
 
-#system{
-position:fixed;
-inset:0;
+#system {
+    position: fixed;
+    inset: 0;
 }
 
-.blackhole{
-position:absolute;
-left:50%;
-top:50%;
-width:min(34vw,34vh);
-height:min(34vw,34vh);
-transform:translate(-50%,-50%);
-border-radius:50%;
-background:#000;
-z-index:30;
+.blackhole {
+    position: absolute;
+    left: 50%;
+    top: 50%;
 
-box-shadow:
-0 0 50px rgba(255,170,50,.3),
-0 0 200px rgba(255,120,0,.12);
+    width: min(34vw, 34vh);
+    height: min(34vw, 34vh);
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+    background: #000;
+
+    z-index: 30;
+
+    box-shadow:
+        0 0 50px rgba(255,170,50,0.25),
+        0 0 180px rgba(255,120,0,0.12);
 }
 
-.disk{
-position:absolute;
-left:50%;
-top:50%;
-transform:translate(-50%,-50%);
-border-radius:50%;
-pointer-events:none;
+/* задня частина акреційного диска */
+
+.disk.back {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: min(95vw, 1400px);
+    height: min(10vw, 120px);
+
+    border-radius: 50%;
+
+    z-index: 10;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255,255,255,0.95) 0%,
+            rgba(255,230,180,0.85) 25%,
+            rgba(255,170,70,0.45) 55%,
+            transparent 80%
+        );
+
+    filter: blur(12px);
+
+    pointer-events: none;
 }
 
-.disk.back{
-width:min(80vw,1100px);
-height:min(20vw,220px);
-z-index:10;
+/* передня частина акреційного диска */
 
-background:
-radial-gradient(
-ellipse,
-rgba(255,255,255,.95) 0%,
-rgba(255,220,150,.85) 30%,
-rgba(255,160,60,.45) 55%,
-transparent 80%
-);
+.disk.front {
+    position: absolute;
 
-filter:blur(14px);
+    left: 50%;
+    top: 50%;
+
+    width: min(95vw, 1400px);
+    height: min(3vw, 38px);
+
+    transform:
+        translate(-50%, -50%)
+        translateY(95px);
+
+    border-radius: 50%;
+
+    z-index: 50;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255,255,255,0.95) 0%,
+            rgba(255,230,170,0.90) 20%,
+            rgba(255,160,50,0.55) 50%,
+            transparent 80%
+        );
+
+    filter: blur(6px);
+
+    pointer-events: none;
 }
 
-.disk.front{
-width:min(80vw,1100px);
-height:min(10vw,100px);
-z-index:50;
+.planet {
+    position: absolute;
 
-background:
-radial-gradient(
-ellipse,
-rgba(255,255,255,.95) 0%,
-rgba(255,220,150,.80) 30%,
-rgba(255,140,0,.45) 55%,
-transparent 80%
-);
+    width: 74px;
+    height: 74px;
 
-transform:
-translate(-50%,-50%)
-translateY(110px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-filter:blur(10px);
+    border-radius: 50%;
+
+    cursor: pointer;
+    text-decoration: none;
+
+    z-index: 200;
+
+    transition: transform 0.25s ease;
 }
 
-.planet{
-position:absolute;
-width:90px;
-height:90px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:50%;
-text-decoration:none;
-z-index:200;
-cursor:pointer;
-transition:.3s;
+.planet:hover {
+    transform: scale(1.18);
 }
 
-.planet:hover{
-transform:scale(1.2);
+.icon {
+    font-size: 36px;
 }
 
-.icon{
-font-size:42px;
+.label {
+    position: absolute;
+
+    top: 86px;
+    left: 50%;
+
+    width: 260px;
+
+    transform: translateX(-50%);
+
+    text-align: center;
+
+    white-space: normal;
+    line-height: 1.22;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    color: white;
+
+    text-shadow:
+        0 0 10px black,
+        0 0 20px black,
+        0 0 30px black;
 }
 
-.label{
-position:absolute;
-top:105px;
-left:50%;
-transform:translateX(-50%);
-white-space:nowrap;
-font-size:14px;
-font-weight:700;
-color:#fff;
-text-shadow:
-0 0 10px black,
-0 0 20px black;
+.nuclear {
+    background: rgba(29,124,255,0.28);
 }
 
-.nuclear{
-background:#1d7cff44;
+.semiconductor {
+    background: rgba(0,213,255,0.28);
 }
 
-.semiconductor{
-background:#00d5ff44;
+.mechanics {
+    background: rgba(194,72,255,0.28);
 }
 
-.mechanics{
-background:#c248ff44;
+.radio {
+    background: rgba(57,255,131,0.28);
 }
 
-.radio{
-background:#39ff8344;
-}
-
-.video{
-background:#ff723544;
-}
-
-@media(max-width:900px){
-
-.planet{
-width:72px;
-height:72px;
-}
-
-.icon{
-font-size:32px;
-}
-
-.label{
-font-size:11px;
-top:82px;
-}
-
-.blackhole{
-width:45vw;
-height:45vw;
-}
-
-.disk.back{
-height:25vw;
-}
-
-.disk.front{
-height:14vw;
-}
-
-}
+.video {
