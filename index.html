@@ -8,28 +8,31 @@
 
 <style>
 
-*{
+html,body{
 margin:0;
 padding:0;
-box-sizing:border-box;
-}
-
-body{
+width:100%;
+height:100%;
 overflow:hidden;
 background:#000;
 font-family:Arial,sans-serif;
-height:100vh;
-width:100vw;
 }
 
-.stars{
+body{
+position:relative;
+}
+
+#stars{
 position:fixed;
-width:100%;
-height:100%;
+inset:0;
 background:
-radial-gradient(white 1px, transparent 1px);
-background-size:60px 60px;
-opacity:0.5;
+radial-gradient(circle at 20% 30%, white 1px, transparent 1px),
+radial-gradient(circle at 80% 20%, white 1px, transparent 1px),
+radial-gradient(circle at 40% 70%, white 1px, transparent 1px),
+radial-gradient(circle at 70% 80%, white 1px, transparent 1px),
+radial-gradient(circle at 10% 80%, white 1px, transparent 1px);
+background-size:120px 120px;
+opacity:.8;
 }
 
 .blackhole{
@@ -37,141 +40,158 @@ position:absolute;
 left:50%;
 top:50%;
 transform:translate(-50%,-50%);
-width:min(70vw,70vh);
-height:min(70vw,70vh);
-border-radius:50%;
+width:min(38vw,38vh);
+height:min(38vw,38vh);
 background:black;
-box-shadow:
-0 0 200px #ff9e00,
-0 0 300px #ff6f00,
-0 0 350px rgba(255,120,0,.4);
-z-index:5;
-}
-
-.blackhole::before{
-content:'';
-position:absolute;
-inset:-20%;
 border-radius:50%;
-background:
-radial-gradient(circle,
-rgba(255,180,0,.95) 0%,
-rgba(255,120,0,.9) 25%,
-rgba(255,80,0,.8) 45%,
-transparent 60%);
-animation:disk 15s linear infinite;
-filter:blur(12px);
+z-index:5;
+pointer-events:none;
+box-shadow:
+0 0 80px rgba(255,180,80,.25);
 }
 
-@keyframes disk{
-from{
-transform:rotate(0deg) scaleX(1.9);
+.disk{
+position:absolute;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+width:min(100vw,1200px);
+height:min(18vw,180px);
+border-radius:50%;
+z-index:2;
+pointer-events:none;
+
+background:
+linear-gradient(
+90deg,
+rgba(255,180,50,0) 0%,
+rgba(255,190,90,.6) 20%,
+rgba(255,255,255,1) 35%,
+rgba(255,180,50,.8) 50%,
+rgba(255,255,255,1) 65%,
+rgba(255,190,90,.6) 80%,
+rgba(255,180,50,0) 100%
+);
+
+filter:blur(6px);
+
+animation:diskMove 8s ease-in-out infinite;
 }
-to{
-transform:rotate(360deg) scaleX(1.9);
+
+@keyframes diskMove{
+
+0%{
+transform:translate(-50%,-50%) scaleY(1);
 }
+
+50%{
+transform:translate(-50%,-50%) scaleY(.92);
+}
+
+100%{
+transform:translate(-50%,-50%) scaleY(1);
+}
+
 }
 
 .orbit{
 position:absolute;
 left:50%;
 top:50%;
-transform-style:preserve-3d;
+width:0;
+height:0;
+pointer-events:none;
 }
 
 .object{
 position:absolute;
-width:90px;
-height:90px;
-border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:42px;
-cursor:pointer;
 text-decoration:none;
-backdrop-filter:blur(5px);
-transition:.3s;
-user-select:none;
+font-size:44px;
+width:82px;
+height:82px;
+border-radius:50%;
+backdrop-filter:blur(6px);
+pointer-events:auto;
+z-index:9999;
+transition:.25s;
 }
 
 .object:hover{
-transform:scale(1.2);
+transform:scale(1.25);
 }
 
 .label{
 position:absolute;
-top:100%;
+top:95px;
 left:50%;
 transform:translateX(-50%);
-white-space:nowrap;
 font-size:12px;
+white-space:nowrap;
 color:white;
-margin-top:8px;
-text-align:center;
+font-weight:bold;
+text-shadow:0 0 8px black;
 }
 
 .nuclear{
-background:#2196f3;
+background:#1f8fff55;
 }
 
-.semiconductor{
-background:#00bcd4;
+.semi{
+background:#00d5ff55;
 }
 
-.mechanics{
-background:#9c27b0;
+.mech{
+background:#b64cff55;
 }
 
 .radio{
-background:#4caf50;
+background:#47ff6b55;
 }
 
 .video{
-background:#ff5722;
+background:#ff6b3d55;
 }
 
-.rotate1{
-animation:orbit1 30s linear infinite;
+.r1{
+animation:rot1 30s linear infinite;
+}
+.r2{
+animation:rot2 45s linear infinite;
+}
+.r3{
+animation:rot3 38s linear infinite;
+}
+.r4{
+animation:rot4 55s linear infinite;
+}
+.r5{
+animation:rot5 12s linear infinite;
 }
 
-.rotate2{
-animation:orbit2 40s linear infinite;
-}
-
-.rotate3{
-animation:orbit3 35s linear infinite;
-}
-
-.rotate4{
-animation:orbit4 50s linear infinite;
-}
-
-.rotate5{
-animation:orbit5 15s linear infinite;
-}
-
-@keyframes orbit1{
+@keyframes rot1{
 from{transform:rotate(0deg);}
 to{transform:rotate(360deg);}
 }
 
-@keyframes orbit2{
+@keyframes rot2{
 from{transform:rotate(360deg);}
 to{transform:rotate(0deg);}
 }
 
-@keyframes orbit3{
+@keyframes rot3{
 from{transform:rotate(0deg);}
 to{transform:rotate(360deg);}
 }
 
-@keyframes orbit4{
+@keyframes rot4{
 from{transform:rotate(360deg);}
 to{transform:rotate(0deg);}
 }
 
-@keyframes orbit5{
+@keyframes rot5{
 from{transform:rotate(0deg);}
 to{transform:rotate(360deg);}
 }
@@ -181,16 +201,17 @@ to{transform:rotate(360deg);}
 .object{
 width:70px;
 height:70px;
-font-size:30px;
+font-size:34px;
 }
 
 .label{
 font-size:10px;
+top:80px;
 }
 
 .blackhole{
-width:85vw;
-height:85vw;
+width:48vw;
+height:48vw;
 }
 
 }
@@ -200,67 +221,58 @@ height:85vw;
 
 <body>
 
-<div class="stars"></div>
+<div id="stars"></div>
 
+<div class="disk"></div>
 <div class="blackhole"></div>
 
-<div class="orbit rotate1">
+<div class="orbit r1">
 <a class="object nuclear"
-style="transform:translateX(360px)"
+style="transform:translateX(350px)"
 href="https://drive.google.com/drive/folders/1pgVjmirx5zQP5v_W080ue8qMUYkrs1oS?usp=sharing"
 target="_blank">
 ⚛️
-<div class="label">
-Фізика ядра
-</div>
+<div class="label">Фізика ядра</div>
 </a>
 </div>
 
-<div class="orbit rotate2">
-<a class="object semiconductor"
-style="transform:translateX(290px)"
+<div class="orbit r2">
+<a class="object semi"
+style="transform:translateX(260px)"
 href="https://drive.google.com/drive/folders/1_gnIbizWyluyhaHodqn8mg7JbauR3Igd?usp=sharing"
 target="_blank">
 💎
-<div class="label">
-Напівпровідники
-</div>
+<div class="label">Напівпровідники</div>
 </a>
 </div>
 
-<div class="orbit rotate3">
-<a class="object mechanics"
-style="transform:translateX(440px)"
+<div class="orbit r3">
+<a class="object mech"
+style="transform:translateX(460px)"
 href="https://drive.google.com/drive/folders/1k0wxwbMrUFMAlsgtt0J_MvD8pNOlIF3f?usp=sharing"
 target="_blank">
 🪐
-<div class="label">
-Теоретична механіка
-</div>
+<div class="label">Теоретична механіка</div>
 </a>
 </div>
 
-<div class="orbit rotate4">
+<div class="orbit r4">
 <a class="object radio"
-style="transform:translateX(520px)"
+style="transform:translateX(560px)"
 href="https://drive.google.com/drive/folders/1vwclRm7k7wVxIQWNTVWecNj9tlskMgWr?usp=sharing"
 target="_blank">
 📡
-<div class="label">
-Радіотехніка
-</div>
+<div class="label">Радіотехніка</div>
 </a>
 </div>
 
-<div class="orbit rotate5">
+<div class="orbit r5">
 <a class="object video"
-style="transform:translateX(230px)"
+style="transform:translateX(210px)"
 href="https://drive.google.com/drive/folders/1yQppVQqbycx3ckBJ_e9AnZ7OGgzNRnbl?usp=sharing"
 target="_blank">
 🌠
-<div class="label">
-Відео лекцій
-</div>
+<div class="label">Відео лекцій</div>
 </a>
 </div>
 
