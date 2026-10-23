@@ -178,27 +178,48 @@ horizon.addColorStop(
     1,
     "rgba(255,210,120,0.08)"
 );
+gctx.beginPath();
 
+gctx.arc(
+    cx,
+    cy,
+    r * 1.12,
+    0,
+    Math.PI * 2
+);
+
+gctx.fillStyle = horizon;
+
+gctx.fill();
 gctx.beginPath();
 
     /* фотонне кільце */
+
+for(let i=0;i<10;i++){
 
     gctx.beginPath();
 
     gctx.arc(
         cx,
         cy,
-        r*1.03,
+        r * 1.02 + i * 0.6,
         0,
-        Math.PI*2
+        Math.PI * 2
     );
 
-    gctx.lineWidth = 3;
-
     gctx.strokeStyle =
-        "rgba(255,220,140,0.4)";
+    `rgba(
+        255,
+        220,
+        150,
+        ${0.10 - i*0.008}
+    )`;
+
+    gctx.lineWidth = 2;
 
     gctx.stroke();
+
+}
 
     /* ПЕРЕДНЯ ЧАСТИНА ДИСКА */
 
