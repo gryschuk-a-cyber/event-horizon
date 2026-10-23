@@ -1,94 +1,44 @@
 <!DOCTYPE html>
 <html lang="uk">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Event Horizon</title>
-
-<link rel="stylesheet"
-href="style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#03040a">
+  <title>Event Horizon — навчальна система</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <canvas id="space" aria-hidden="true"></canvas>
+  <canvas id="gargantua" aria-hidden="true"></canvas>
 
-<!-- Зоряне небо -->
+  <header class="site-header">
+    <div class="eyebrow">INTERACTIVE COSMOS</div>
+    <h1>EVENT <span>HORIZON</span></h1>
+    <p>Навчальні світи навколо Гаргантюа</p>
+  </header>
 
-<canvas id="space"></canvas>
+  <div class="hint" aria-hidden="true"><span class="hint-dot"></span> Обери планету, щоб відкрити матеріали</div>
 
-<!-- Гаргантюа -->
+  <div id="system">
+    <a class="planet nuclear" href="https://drive.google.com/drive/folders/1pgVjmirx5zQP5v_W080ue8qMUYkrs1oS?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Фізика ядра та елементарних частинок">
+      <span class="planet-core"><span class="icon">⚛</span></span>
+      <span class="label">Фізика ядра та елементарних частинок</span>
+    </a>
+    <a class="planet semiconductor" href="https://drive.google.com/drive/folders/1_gnIbizWyluyhaHodqn8mg7JbauR3Igd?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Фізика напівпровідників">
+      <span class="planet-core"><span class="icon">◆</span></span>
+      <span class="label">Фізика напівпровідників</span>
+    </a>
+    <a class="planet mechanics" href="https://drive.google.com/drive/folders/1k0wxwbMrUFMAlsgtt0J_MvD8pNOlIF3f?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Теоретична механіка">
+      <span class="planet-core"><span class="icon">🪐</span></span>
+      <span class="label">Теоретична механіка</span>
+    </a>
+    <a class="planet radio" href="https://drive.google.com/drive/folders/1vwclRm7k7wVxIQWNTVWecNj9tlskMgWr?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Основи радіотехніки та конструювання">
+      <span class="planet-core"><span class="icon">⌁</span></span>
+      <span class="label">Основи радіотехніки та конструювання</span>
+    </a>
+  </div>
 
-<canvas id="gargantua"></canvas>
-
-<div id="system">
-
-<a
-class="planet nuclear"
-href="https://drive.google.com/drive/folders/1pgVjmirx5zQP5v_W080ue8qMUYkrs1oS?usp=sharing"
-target="_blank">
-
-<div class="icon">
-⚛️
-</div>
-
-<div class="label">
-Фізика ядра та елементарних частинок
-</div>
-
-</a>
-
-<a
-class="planet semiconductor"
-href="https://drive.google.com/drive/folders/1_gnIbizWyluyhaHodqn8mg7JbauR3Igd?usp=sharing"
-target="_blank">
-
-<div class="icon">
-💎
-</div>
-
-<div class="label">
-Фізика напівпровідників
-</div>
-
-</a>
-
-<a
-class="planet mechanics"
-href="https://drive.google.com/drive/folders/1k0wxwbMrUFMAlsgtt0J_MvD8pNOlIF3f?usp=sharing"
-target="_blank">
-
-<div class="icon">
-🪐
-</div>
-
-<div class="label">
-Теоретична механіка
-</div>
-
-</a>
-<a
-class="planet radio"
-href="https://drive.google.com/drive/folders/1vwclRm7k7wVxIQWNTVWecNj9tlskMgWr?usp=sharing"
-target="_blank">
-
-<div class="icon">
-📡
-</div>
-
-<div class="label">
-Основи радіотехніки та конструювання
-</div>
-
-</a>
-
-</div>
-
-<script src="script.js"></script>
-
+  <div class="corner-note"><span></span> GRAVITY IS CALLING</div>
+  <script src="script.js"></script>
 </body>
 </html>
