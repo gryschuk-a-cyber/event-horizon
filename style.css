@@ -1,124 +1,196 @@
-html,
-body{
-    margin:0;
-    padding:0;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
-    width:100%;
-    height:100%;
-
-    overflow:hidden;
-
-    background:#000;
-
-    font-family:"Segoe UI",Arial,sans-serif;
+:root {
+  color-scheme: dark;
+  --text: #f2f5ff;
+  --muted: #a7b1cc;
 }
 
-#space{
-    position:fixed;
-    inset:0;
+* { box-sizing: border-box; }
 
-    width:100%;
-    height:100%;
-
-    z-index:0;
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #03040a;
+  color: var(--text);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
 }
 
-#gargantua{
-    position:fixed;
-    inset:0;
+#space, #gargantua {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+#space { z-index: 0; }
+#gargantua { z-index: 2; pointer-events: none; }
 
-    width:100%;
-    height:100%;
-
-    z-index:20;
-
-    pointer-events:none;
+.site-header {
+  position: fixed;
+  z-index: 10;
+  top: clamp(22px, 4vh, 44px);
+  left: 0;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+  text-shadow: 0 2px 20px #000;
+}
+.eyebrow {
+  font: 600 10px/1.5 Orbitron, sans-serif;
+  letter-spacing: .42em;
+  color: #ffcb8b;
+  opacity: .9;
+}
+h1 {
+  margin: 8px 0 5px;
+  font: 500 clamp(22px, 3vw, 38px)/1.2 Orbitron, sans-serif;
+  letter-spacing: .12em;
+}
+h1 span { color: #ffc17d; }
+.site-header p {
+  margin: 0;
+  color: #b9c2d8;
+  font-size: clamp(11px, 1.2vw, 14px);
+  letter-spacing: .08em;
 }
 
-#system{
-    position:fixed;
-    inset:0;
-
-    z-index:100;
+#system {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
 }
 
-.planet{
-    position:absolute;
+.planet {
+  --planet-color: 100, 170, 255;
+  position: absolute;
+  width: 82px;
+  height: 82px;
+  display: grid;
+  place-items: center;
+  color: white;
+  text-decoration: none;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+  will-change: left, top, opacity, filter;
+  transition: filter .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.planet:hover, .planet:focus-visible {
+  filter: brightness(1.35);
+  outline: none;
+}
+.planet-core {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--planet-color), .75);
+  background:
+    radial-gradient(circle at 30% 24%, rgba(255,255,255,.38), transparent 22%),
+    radial-gradient(circle at 40% 35%, rgba(var(--planet-color), .45), rgba(5,10,25,.96) 72%);
+  box-shadow:
+    0 0 10px rgba(var(--planet-color), .28),
+    0 0 30px rgba(var(--planet-color), .17),
+    inset -8px -9px 16px rgba(0,0,0,.8),
+    inset 3px 3px 12px rgba(255,255,255,.12);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.planet-core::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--planet-color), .2);
+  transform: rotate(-24deg) scaleY(.42);
+}
+.planet:hover .planet-core, .planet:focus-visible .planet-core {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(var(--planet-color), .55), 0 0 44px rgba(var(--planet-color), .25), inset -8px -9px 16px #000;
+}
+.icon {
+  font-size: 26px;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 0 12px rgba(var(--planet-color), .9);
+}
+.label {
+  position: absolute;
+  top: 73px;
+  left: 50%;
+  width: 190px;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #f5f7ff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-shadow: 0 1px 4px #000, 0 0 12px #000, 0 0 22px #000;
+  transition: opacity .2s ease;
+}
+.nuclear { --planet-color: 80, 155, 255; }
+.semiconductor { --planet-color: 80, 238, 255; }
+.mechanics { --planet-color: 205, 110, 255; }
+.radio { --planet-color: 255, 190, 95; }
 
-    width:78px;
-    height:78px;
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    text-decoration:none;
-
-    cursor:pointer;
-
-    transition
-    .label{
-
-    position:absolute;
-
-    top:88px;
-    left:50%;
-
-    width:220px;
-
-    transform:
-    translateX(-50%);
-
-    text-align:center;
-
-    color:white;
-
-    font-size:14px;
-    font-weight:700;
-
-    line-height:1.25;
-
-    white-space:normal;
-
-    text-shadow:
-        0 0 6px #000,
-        0 0 12px #000,
-        0 0 24px #000;
+.hint {
+  position: fixed;
+  z-index: 10;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #b3bdd2;
+  font-size: 11px;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  pointer-events: none;
+  text-shadow: 0 1px 8px #000;
+}
+.hint-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffc17d;
+  box-shadow: 0 0 12px #ffb65d;
+}
+.corner-note {
+  position: fixed;
+  z-index: 10;
+  right: 22px;
+  bottom: 26px;
+  color: #6f7b98;
+  font: 10px Orbitron, sans-serif;
+  letter-spacing: .16em;
+  pointer-events: none;
+}
+.corner-note span {
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  margin: 0 8px 3px 0;
+  background: #d18e58;
 }
 
-.nuclear{
-
-    background:
-    rgba(40,120,255,.28);
-
-    border:
-    1px solid
-    rgba(120,180,255,.22);
+@media (max-width: 650px) {
+  .site-header { top: 18px; }
+  .eyebrow { font-size: 8px; letter-spacing: .3em; }
+  h1 { font-size: 22px; }
+  .site-header p { max-width: 80%; margin: 0 auto; line-height: 1.5; }
+  .planet { width: 66px; height: 66px; }
+  .planet-core { width: 48px; height: 48px; }
+  .icon { font-size: 21px; }
+  .label { top: 57px; width: 132px; font-size: 10px; }
+  .hint { bottom: 16px; font-size: 10px; }
+  .corner-note { display: none; }
 }
-
-.semiconductor{
-
-    background:
-    rgba(0,220,255,.22);
-
-    border:
-    1px solid
-    rgba(140,255,255,.22);
+@media (prefers-reduced-motion: reduce) {
+  .planet, .planet-core, .label { transition: none; }
 }
-
-.mechanics{
-
-    background:
-    rgba(180,70,255,.22);
-
-    border:
-    1px solid
-    rgba(230,150,255,.22);
-}
-
-.radio{
-
-    background:
-  
