@@ -285,4 +285,33 @@ function animatePlanets(){
         cy + 140
     );
 
-    setPlanet
+    setPlanet(
+        semiconductor,
+        cx - 150 + Math.cos(t * 0.8) * 15,
+        cy - 110
+    );
+
+    setPlanet(
+        mechanics,
+        cx + 260 + Math.sin(t * 0.5) * 15,
+        cy + 90
+    );
+
+    setPlanet(
+        radio,
+        cx + 430 + Math.cos(t * 0.3) * 10,
+        cy - 90
+    );
+
+    setPlanet(
+        video,
+        cx + Math.cos(t * 3.8) * 170,
+        cy + Math.sin(t * 3.8) * 60
+    );
+
+    requestAnimationFrame(
+        animatePlanets
+    );
+}
+
+animatePlanets();
