@@ -90,8 +90,9 @@
 
     // Diffuse gravitational glow
     const halo = c.createRadialGradient(cx, cy, radius * .8, cx, cy, radius * 3.5);
-    halo.addColorStop(0, "rgba(255,126,45,.16)");
-    halo.addColorStop(.35, "rgba(255,111,34,.09)");
+    halo.addColorStop(0, "rgba(255,116,24,.34)");
+    halo.addColorStop(.22, "rgba(255,91,12,.22)");
+    halo.addColorStop(.48, "rgba(255,70,8,.12)");
     halo.addColorStop(1, "rgba(255,100,20,0)");
     c.fillStyle = halo;
     c.fillRect(cx - radius * 4, cy - radius * 4, radius * 8, radius * 8);
@@ -104,8 +105,8 @@
       const r = radius * (1.12 + i * .055);
       c.beginPath();
       c.ellipse(0, 0, r * 1.55, r, 0, Math.PI, Math.PI * 2);
-      c.strokeStyle = `rgba(${255},${145 + Math.min(75, i * 2)},${65 + Math.min(90, i * 2)},${.035 + .008 * (1 - i / 34)})`;
-      c.lineWidth = 1.2 + (34 - i) * .09;
+      c.strokeStyle = `rgba(255,${110 + Math.min(115, i * 3)},${24 + Math.min(125, i * 3)},${.07 + .012 * (1 - i / 34)})`;
+      c.lineWidth = 1.5 + (34 - i) * .11;
       c.stroke();
     }
     c.restore();
@@ -121,8 +122,8 @@
       c.beginPath();
       c.ellipse(0, 0, r * 1.65, r, 0, phase, phase + Math.PI * (1.1 + .45 * Math.sin(t * .0003 + i)));
       const hot = Math.max(0, 1 - i / 50);
-      c.strokeStyle = `rgba(255,${Math.floor(115 + hot * 125)},${Math.floor(45 + hot * 130)},${.035 + hot * .105})`;
-      c.lineWidth = 1 + hot * 2.5;
+      c.strokeStyle = `rgba(255,${Math.floor(78 + hot * 177)},${Math.floor(12 + hot * 145)},${.09 + hot * .22})`;
+      c.lineWidth = 1.4 + hot * 3.8;
       c.stroke();
     }
     c.restore();
@@ -131,8 +132,8 @@
     for (let i = 0; i < 8; i++) {
       c.beginPath();
       c.arc(cx, cy, radius * (1.02 + i * .009), 0, Math.PI * 2);
-      c.strokeStyle = `rgba(255,225,170,${.18 - i * .018})`;
-      c.lineWidth = i < 2 ? 2.1 : 1;
+      c.strokeStyle = `rgba(255,${Math.max(150, 246 - i * 9)},${Math.max(75, 178 - i * 12)},${.34 - i * .032})`;
+      c.lineWidth = i < 2 ? 2.8 : 1.3;
       c.stroke();
     }
 
@@ -140,8 +141,9 @@
     const black = c.createRadialGradient(cx - radius * .18, cy - radius * .2, radius * .06, cx, cy, radius * 1.04);
     black.addColorStop(0, "#000");
     black.addColorStop(.78, "#000");
-    black.addColorStop(.96, "#020207");
-    black.addColorStop(1, "rgba(255,169,94,.25)");
+    black.addColorStop(.94, "#020207");
+    black.addColorStop(.975, "rgba(255,108,24,.18)");
+    black.addColorStop(1, "rgba(255,190,105,.72)");
     c.beginPath();
     c.arc(cx, cy, radius, 0, Math.PI * 2);
     c.fillStyle = black;
@@ -155,8 +157,8 @@
       const r = radius * (1.18 + i * .075);
       c.beginPath();
       c.ellipse(0, 0, r * 1.55, r, 0, .04, Math.PI - .04);
-      c.strokeStyle = `rgba(255,${Math.floor(165 + i * 3)},${Math.floor(90 + i * 4)},${.08 - i * .002})`;
-      c.lineWidth = 1.2 + (22 - i) * .09;
+      c.strokeStyle = `rgba(255,${Math.floor(135 + i * 5)},${Math.floor(38 + i * 6)},${.14 - i * .004})`;
+      c.lineWidth = 1.5 + (22 - i) * .12;
       c.stroke();
     }
     c.restore();
